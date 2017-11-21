@@ -1,5 +1,9 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
 public class Card {
     private String cardId;
     private String name;
