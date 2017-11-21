@@ -3,6 +3,7 @@ package models;
 import java.util.List;
 
 public class User {
+    private int id;
     private String username;
     private String password;
     private List<Card> collection;
@@ -37,5 +38,13 @@ public class User {
 
     public void setCollection(List<Card> collection) {
         this.collection = collection;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

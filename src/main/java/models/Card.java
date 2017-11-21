@@ -1,6 +1,7 @@
 package models;
 
 public class Card {
+    private int id;
     private String cardId;
     private String name;
     private String type;
@@ -40,6 +41,13 @@ public class Card {
         this.img = img;
         this.imgGold = imgGold;
         this.locale = locale;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCardId() {
