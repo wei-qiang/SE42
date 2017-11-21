@@ -2,9 +2,17 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
         version="2.0">
-    <persistence-unit name="manager">
+    <persistence-unit name="dbi359166">
+        <class>models.Card</class>
+        <class>models.User</class>
         <properties>
-            <property name="javax.persistence.jdbc.driver" value="org."/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://studmysql01.fhict.local:3306/dbi359166"/>
+            <property name="javax.persistence.jdbc.user" value="dbi359166"/>
+            <property name="javax.persistence.jdbc.password" value="wachtwoord"/>
+            <property name="javax.persistence.schema-generation.database.action" value="update"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
         </properties>
     </persistence-unit>
 </persistence>

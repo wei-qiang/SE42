@@ -1,12 +1,19 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.List;
 
+@Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String username;
     private String password;
-    private List<Card> collection;
+    //private List<Card> collection;
 
     public User() {
     }
@@ -32,13 +39,13 @@ public class User {
         this.password = password;
     }
 
-    public List<Card> getCollection() {
-        return collection;
-    }
+   // public List<Card> getCollection() {
+   //     return collection;
+  //  }
 
-    public void setCollection(List<Card> collection) {
-        this.collection = collection;
-    }
+   // public void setCollection(List<Card> collection) {
+    //    this.collection = collection;
+    //}
 
     public int getId() {
         return id;
