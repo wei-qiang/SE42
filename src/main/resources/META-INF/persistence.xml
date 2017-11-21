@@ -5,6 +5,13 @@
     <persistence-unit name="manager">
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://studmysql01.fhict.local"/>
+            <property name="javax.persistence.jdbc.user" value="dbi359166"/>
+            <property name="javax.persistence.jdbc.password" value="wachtwoord"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>
