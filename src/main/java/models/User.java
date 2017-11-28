@@ -13,7 +13,7 @@ public class User {
     private int id;
     private String username;
     private String password;
-    //private List<Card> collection;
+    private List<Card> collection;
 
     public User() {
     }
@@ -39,13 +39,13 @@ public class User {
         this.password = password;
     }
 
-   // public List<Card> getCollection() {
-   //     return collection;
-  //  }
+    public List<Card> getCollection() {
+        return collection;
+   }
 
-   // public void setCollection(List<Card> collection) {
-    //    this.collection = collection;
-    //}
+    public void setCollection(List<Card> collection) {
+        this.collection = collection;
+    }
 
     public int getId() {
         return id;
