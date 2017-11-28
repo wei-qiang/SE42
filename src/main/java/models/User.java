@@ -3,6 +3,9 @@ package models;
 import javax.persistence.*;
 import java.util.List;
 
+@NamedQuery(
+        name = "User.login",
+        query = "select a from User as a where a.username = :username and a.password = :password ")
 @Entity
 public class User {
     @Id
@@ -10,7 +13,7 @@ public class User {
     private int id;
     private String username;
     private String password;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     private List<Card> collection;
 
     public User() {
