@@ -21,7 +21,10 @@ public class GreetingController {
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbi359166");
         EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
         em.persist(new Card("test"));
+        em.getTransaction().commit();
+
         return new Greeting(counter.incrementAndGet(),
                 String.format(template, name));
     }
