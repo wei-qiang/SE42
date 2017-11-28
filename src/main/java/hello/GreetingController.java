@@ -6,6 +6,7 @@ import models.Card;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import service.CardMgr;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,9 +22,11 @@ public class GreetingController {
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbi359166");
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(new Card("test"));
-        em.getTransaction().commit();
+        //em.getTransaction().begin();
+        //em.persist(new Card("test"));
+        //em.getTransaction().commit();
+        CardMgr cardMgr = new CardMgr();
+        cardMgr.createCard("hallo");
 
         return new Greeting(counter.incrementAndGet(),
                 String.format(template, name));
