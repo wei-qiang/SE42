@@ -10,6 +10,7 @@ public class User {
     private int id;
     private String username;
     private String password;
+    @OneToMany
     private List<Card> collection;
 
     public User() {
@@ -38,7 +39,7 @@ public class User {
 
     public List<Card> getCollection() {
         return collection;
-   }
+    }
 
     public void setCollection(List<Card> collection) {
         this.collection = collection;
