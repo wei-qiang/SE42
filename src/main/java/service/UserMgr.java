@@ -8,9 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+
 public class UserMgr {
 
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("bankPU");
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbi359166");
 
     public void register(String username,String password) {
         EntityManager em = emf.createEntityManager();

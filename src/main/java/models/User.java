@@ -17,6 +17,10 @@ public class User extends Account {
     public User() {
     }
 
+    public User(String username, String password) {
+        super(username, password);
+    }
+
     public User(String username, String password, List<Card> collection) {
         super(username, password);
         this.collection = collection;

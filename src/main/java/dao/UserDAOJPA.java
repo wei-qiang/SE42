@@ -3,7 +3,6 @@ package dao;
 import models.User;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQuery;
 import javax.persistence.Query;
 
 public class UserDAOJPA implements UserDAO {
