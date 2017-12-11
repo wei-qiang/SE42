@@ -1,12 +1,17 @@
 package models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import java.util.List;
 
+@NamedQuery(
+        name = "User.login",
+        query = "select a from User as a where a.username = :username and a.password = :password ")
 @Entity
 public class User extends Account {
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     private List<Card> collection;
 
     public User() {
