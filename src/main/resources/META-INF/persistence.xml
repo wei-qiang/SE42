@@ -4,7 +4,7 @@
         version="2.0">
     <persistence-unit name="dbi359166">
         <class>models.Card</class>
-        <class>models.User</class>
+        <class>models.Account</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://studmysql01.fhict.local:3306/dbi359166"/>
