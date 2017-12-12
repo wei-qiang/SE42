@@ -10,6 +10,7 @@ public class Card {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String cardId;
+    @Column(unique = true)
     private String name;
     private String type;
     private String faction;
