@@ -19,10 +19,10 @@ public class UserDAOJPA implements UserDAO {
     }
 
     @Override
-    public User login(String username, String password) {
+    public User login(String username) {
         Query q = em.createNamedQuery("User.login", User.class);
         q.setParameter("username", username);
-        q.setParameter("password",password);
+        //q.setParameter("password",password);
         return (User) q.getSingleResult();
     }
 

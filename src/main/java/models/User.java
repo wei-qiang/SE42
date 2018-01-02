@@ -8,7 +8,7 @@ import java.util.List;
 
 @NamedQuery(
         name = "User.login",
-        query = "select a from User as a where a.username = :username and a.password = :password ")
+        query = "select a from User as a where a.username = :username")
 @Entity
 public class User extends Account {
     @OneToMany(cascade = CascadeType.MERGE)
