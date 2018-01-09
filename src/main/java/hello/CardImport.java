@@ -26,6 +26,6 @@ public class CardImport {
             scan.close();
         }
         //maakt json string object.
-        
+
     }
 }
