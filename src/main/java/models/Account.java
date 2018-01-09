@@ -11,6 +11,7 @@ public abstract class Account {
     @Column(unique = true)
     private String username;
     private String password;
+    private String session;
 
 
     public Account() {
@@ -43,5 +44,13 @@ public abstract class Account {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
     }
 }

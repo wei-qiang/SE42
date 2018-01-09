@@ -3,9 +3,9 @@ package dao;
 import models.User;
 
 public interface UserDAO {
-    public User getByid(int id);
-    public User login(String username,String password);
-    public void deleteById(int id);
-    public void editUser(User user);
-    public void register(String username,String password);
+    User getByid(int id);
+    User login(String username);
+    void deleteById(int id);
+    void editUser(User user);
+    void register(String username,String password);
 }
