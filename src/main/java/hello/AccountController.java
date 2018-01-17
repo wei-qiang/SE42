@@ -46,9 +46,7 @@ public class AccountController {
                 sessionCookie.setPath("/");
                 response.addCookie(userCookie);
                 response.addCookie(sessionCookie);
-
                 Cookie[] test = request.getCookies();
-                importJson("{\"artist\":\"Jakub Kasper\",\"attack\":4,\"cardClass\":\"NEUTRAL\",\"collectible\":true,\"cost\":4,\"dbfId\":2518,\"flavor\":\"The crowd ALWAYS yells lethal.\",\"health\":4,\"id\":\"AT_121\",\"name\":\"Crowd Favorite\",\"playerClass\":\"NEUTRAL\",\"rarity\":\"EPIC\",\"referencedTags\":[\"BATTLECRY\"],\"set\":\"TGT\",\"text\":\"Whenever you play a card with <b>Battlecry</b>, gain +1/+1.\",\"type\":\"MINION\"}");
                 return "User has logged in succesfully";
             }
         } catch (Exception e) {
@@ -73,10 +71,6 @@ public class AccountController {
     }
 
 
-    public void importJson(String Json){
-        JSONObject obj = new JSONObject(Json);
-        Card card = new Card(obj.getString("artist"));
 
-    }
 
 }
