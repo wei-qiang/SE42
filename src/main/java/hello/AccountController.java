@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class AccountController {
     UserMgr userMgr = new UserMgr();
 
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerAccount(@RequestParam("userName") String userName, @RequestParam("password") String password) {
         try {
             userMgr.register(userName, password);
@@ -34,7 +34,7 @@ public class AccountController {
         }
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginAccount(HttpServletResponse response, HttpServletRequest request, @RequestParam("userName") String userName, @RequestParam("password") String password) {
         try {
             String sessionHash = PasswordHasher.generateStrongPasswordHash(String.valueOf(UUID.randomUUID()));
@@ -55,7 +55,7 @@ public class AccountController {
         return "Something went wrong!";
     }
 
-    @RequestMapping("getCollection")
+    @RequestMapping("/getCollection")
     public List<Card> getCollection(HttpServletRequest request) throws AccessDeniedException {
         if( WebUtils.getCookie(request, "Session").getValue() == userMgr.getUserById(Integer.parseInt(WebUtils.getCookie(request, "User").getValue())).getSession()){
             return userMgr.getUserById(Integer.parseInt(WebUtils.getCookie(request, "User").getValue())).getCollection();
@@ -63,10 +63,10 @@ public class AccountController {
         throw new AccessDeniedException("You'ren't logged in!");
     }
 
-    @RequestMapping("getUser")
+    @RequestMapping("/getUser")
     public @ResponseBody User getaccount(HttpServletRequest request){
-
         User account = userMgr.getUserById(Integer.parseInt(WebUtils.getCookie(request, "User").getValue()));
+        account.setPassword("");
         return account;
     }
 
