@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 @CrossOrigin
 public class AccountController {
     UserMgr userMgr = new UserMgr();
-
+    
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerAccount(@RequestParam("userName") String userName, @RequestParam("password") String password) {
         try {
