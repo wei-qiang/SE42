@@ -1,5 +1,7 @@
 package models;
 
+import service.Encryption;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,8 +24,8 @@ public abstract class Account {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUsername() throws Exception {
+        return Encryption.decrypt(username);
     }
 
     public void setUsername(String username) {

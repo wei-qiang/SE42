@@ -9,7 +9,7 @@ public class Admin extends Account {
     public Admin() {
     }
 
-    public Admin(String username, String password, int rank) {
+    public Admin(String username, String password, int rank) throws Exception {
         super(username, password);
         this.rank = rank;
     }

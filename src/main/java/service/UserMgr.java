@@ -17,12 +17,12 @@ public class UserMgr {
 
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbi359166");
 
-    public void register(String username, String password) {
+    public void register(String username, String password) throws Exception {
         EntityManager em = emf.createEntityManager();
         UserDAO UserDao = new UserDAOJPA(em);
         em.getTransaction().begin();
         try {
-            UserDao.register(username, PasswordHasher.generateStrongPasswordHash(password));
+            UserDao.register(Encryption.encrypt(username), PasswordHasher.generateStrongPasswordHash(password));
             em.getTransaction().commit();
         } catch (NoSuchAlgorithmException e1) {
             Logger.getLogger(UserMgr.class.getName()).log(Level.SEVERE, null, e1);
@@ -87,7 +87,7 @@ public class UserMgr {
         UserDAO userDAO = new UserDAOJPA(em);
         em.getTransaction().begin();
         try {
-            User user = userDAO.login(username);
+            User user = userDAO.login(Encryption.encrypt(username));
             if (PasswordHasher.validatePassword(password, user.getPassword())) {
                 user.setSession(sessionHash);
                 em.getTransaction().commit();

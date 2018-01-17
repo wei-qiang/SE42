@@ -7,5 +7,5 @@ public interface UserDAO {
     User login(String username);
     void deleteById(int id);
     void editUser(User user);
-    void register(String username,String password);
+    void register(String username,String password) throws Exception;
 }

@@ -40,7 +40,7 @@ public class UserDAOJPA implements UserDAO {
     }
 
     @Override
-    public void register(String username, String password) {
+    public void register(String username, String password) throws Exception {
         em.persist(new User(username,password));
     }
 }
