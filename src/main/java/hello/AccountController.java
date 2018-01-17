@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
+@CrossOrigin
 public class AccountController {
     UserMgr userMgr = new UserMgr();
 
