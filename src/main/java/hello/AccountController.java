@@ -3,7 +3,6 @@ package hello;
 import models.Account;
 import models.Card;
 import models.User;
-import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 import service.CardMgr;
@@ -48,8 +47,8 @@ public class AccountController {
                 sessionCookie.setPath("/");
                 response.addCookie(userCookie);
                 response.addCookie(sessionCookie);
-
                 return "User has logged in successfully";
+
             }
         } catch (Exception e) {
             Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, e);
@@ -102,4 +101,5 @@ public class AccountController {
         }
         return false;
     }
+
 }
