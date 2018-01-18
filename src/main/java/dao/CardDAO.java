@@ -2,6 +2,7 @@ package dao;
 
 import models.Card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface CardDAO {
@@ -10,5 +11,5 @@ public interface CardDAO {
     boolean edit(Card card);
     boolean delete(Card card);
     Card findById(int id);
-    List<Card> findAll();
+    ArrayList<Card> findAll();
 }

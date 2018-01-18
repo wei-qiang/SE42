@@ -8,6 +8,7 @@ import models.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,8 +38,18 @@ public class CardMgr {
     public List<Card> getAllCards(){
         EntityManager em = emf.createEntityManager();
         CardDAO cardDAO = new CardDAOJPA(em);
-        em.close();
-        return cardDAO.findAll();
+        ArrayList<Card> cards = new ArrayList<>();
+        em.getTransaction().begin();
+        try {
+            cards = cardDAO.findAll();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+        return cards;
     }
 
     public Card getCard(int id){

@@ -4,6 +4,7 @@ import models.Card;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CardDAOJPA implements CardDAO{
@@ -54,8 +55,8 @@ public class CardDAOJPA implements CardDAO{
     }
 
     @Override
-    public List<Card> findAll() {
+    public ArrayList<Card> findAll() {
         Query q = em.createNamedQuery("Card.getAll", Card.class);
-        return q.getResultList();
+        return (ArrayList<Card>) q.getResultList();
     }
 }
