@@ -91,13 +91,4 @@ public class AccountController {
     }
 
 
-<<<<<<< HEAD
-
-=======
-    public void importJson(String Json){
-        JSONObject obj = new JSONObject(Json);
-        Card card = new Card(obj.getString("artist"));
-    }
->>>>>>> f402ae4f0f74ce476d243a8a524345225452c09d
-
 }
