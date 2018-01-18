@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class AccountController {
     UserMgr userMgr = new UserMgr();
     CardMgr cardMgr = new CardMgr();
-    
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerAccount(@RequestParam("userName") String userName, @RequestParam("password") String password) {
         try {

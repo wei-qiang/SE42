@@ -35,7 +35,6 @@ public class UserDAOJPA implements UserDAO {
 
     @Override
     public void deleteById(int id) {
-        //todo zorg dat de gelinkte tabelen gedropt worden
         User u = em.find(User.class,id);
         em.remove(u);
     }
@@ -43,7 +42,6 @@ public class UserDAOJPA implements UserDAO {
     @Override
     public void editUser(User user) {
         em.merge(user);
-
     }
 
     @Override
