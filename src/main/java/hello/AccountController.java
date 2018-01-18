@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 import service.CardMgr;
-import service.Encryption;
 import service.PasswordHasher;
 import service.UserMgr;
 
@@ -25,6 +24,7 @@ import java.util.logging.Logger;
 @CrossOrigin
 public class AccountController {
     UserMgr userMgr = new UserMgr();
+    CardMgr cardMgr = new CardMgr();
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerAccount(@RequestParam("userName") String userName, @RequestParam("password") String password) {
@@ -59,16 +59,18 @@ public class AccountController {
 
     @RequestMapping("/collection")
     public List<Card> getCollection(HttpServletRequest request) throws AccessDeniedException {
-        if( WebUtils.getCookie(request, "Session").getValue() == userMgr.getUserById(Integer.parseInt(WebUtils.getCookie(request, "User").getValue())).getSession()){
+        if (WebUtils.getCookie(request, "Session").getValue() == userMgr.getUserById(Integer.parseInt(WebUtils.getCookie(request, "User").getValue())).getSession()) {
             return userMgr.getUserById(Integer.parseInt(WebUtils.getCookie(request, "User").getValue())).getCollection();
         }
         throw new AccessDeniedException("You'ren't logged in!");
     }
 
     @RequestMapping("/user")
-    public User getaccount(HttpServletRequest request){
+    public User getaccount(HttpServletRequest request) {
         User account = userMgr.getUserById(Integer.parseInt(WebUtils.getCookie(request, "User").getValue()));
-        account.setPassword("");
+        if(account != null){
+            account.setPassword("");
+        }
         return account;
     }
 
@@ -81,19 +83,23 @@ public class AccountController {
     }
 
     @RequestMapping("/users")
-    public ArrayList getaccounts(){
+    public ArrayList getaccounts() {
         ArrayList<User> userArrayList = userMgr.getAllUsers();
-        for (User u:userArrayList) {
+        for (User u : userArrayList) {
             u.setSession("");
             u.setPassword("");
         }
         return userArrayList;
     }
 
-
-    public void importJson(String Json){
-        JSONObject obj = new JSONObject(Json);
-        Card card = new Card(obj.getString("artist"));
+    @RequestMapping("/addCard/{id}")
+    public boolean addCard(HttpServletRequest request, @PathVariable("id") String id){
+        User account = userMgr.getUserById(Integer.parseInt(WebUtils.getCookie(request, "User").getValue()));
+        if(account != null){
+            account.getCollection().add(cardMgr.getCard(Integer.parseInt(id)));
+            userMgr.editUser(account);
+            return true;
+        }
+        return false;
     }
-
 }

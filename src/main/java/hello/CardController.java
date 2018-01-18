@@ -7,6 +7,7 @@ import service.CardMgr;
 import java.util.ArrayList;
 
 @RestController
+@CrossOrigin
 public class CardController {
     CardMgr cardMgr = new CardMgr();
 
