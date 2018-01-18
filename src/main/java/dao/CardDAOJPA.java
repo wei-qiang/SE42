@@ -48,7 +48,9 @@ public class CardDAOJPA implements CardDAO{
 
     @Override
     public Card findById(int id) {
-        return em.find(Card.class, id);
+        Query q = em.createNamedQuery("Card.get", Card.class);
+        q.setParameter("id", id);
+        return (Card) q.getSingleResult();
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 import service.CardMgr;
+import service.Encryption;
 import service.PasswordHasher;
 import service.UserMgr;
 
@@ -21,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
+@CrossOrigin
 public class AccountController {
     UserMgr userMgr = new UserMgr();
 
@@ -28,7 +30,7 @@ public class AccountController {
     public String registerAccount(@RequestParam("userName") String userName, @RequestParam("password") String password) {
         try {
             userMgr.register(userName, password);
-            return "User has been registered succesfully!";
+            return "User has been registered successfully!";
         } catch (Exception e) {
             return "Something went wrong!";
         }
@@ -46,8 +48,8 @@ public class AccountController {
                 sessionCookie.setPath("/");
                 response.addCookie(userCookie);
                 response.addCookie(sessionCookie);
-                Cookie[] test = request.getCookies();
-                return "User has logged in succesfully";
+                return "User has logged in successfully";
+
             }
         } catch (Exception e) {
             Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, e);
@@ -55,7 +57,7 @@ public class AccountController {
         return "Something went wrong!";
     }
 
-    @RequestMapping("/getCollection")
+    @RequestMapping("/collection")
     public List<Card> getCollection(HttpServletRequest request) throws AccessDeniedException {
         if( WebUtils.getCookie(request, "Session").getValue() == userMgr.getUserById(Integer.parseInt(WebUtils.getCookie(request, "User").getValue())).getSession()){
             return userMgr.getUserById(Integer.parseInt(WebUtils.getCookie(request, "User").getValue())).getCollection();
@@ -63,14 +65,39 @@ public class AccountController {
         throw new AccessDeniedException("You'ren't logged in!");
     }
 
-    @RequestMapping("/getUser")
-    public @ResponseBody User getaccount(HttpServletRequest request){
+    @RequestMapping("/user")
+    public User getaccount(HttpServletRequest request){
         User account = userMgr.getUserById(Integer.parseInt(WebUtils.getCookie(request, "User").getValue()));
         account.setPassword("");
         return account;
     }
 
+    @RequestMapping("/user/{id}")
+    public User getaccount(@PathVariable("id") String id) throws Exception {
+        User user = userMgr.getUserById(Integer.parseInt(id));
+        user.setPassword("");
+        user.setSession("");
+        return user;
+    }
+
+    @RequestMapping("/users")
+    public ArrayList getaccounts(){
+        ArrayList<User> userArrayList = userMgr.getAllUsers();
+        for (User u:userArrayList) {
+            u.setSession("");
+            u.setPassword("");
+        }
+        return userArrayList;
+    }
 
 
+<<<<<<< HEAD
+
+=======
+    public void importJson(String Json){
+        JSONObject obj = new JSONObject(Json);
+        Card card = new Card(obj.getString("artist"));
+    }
+>>>>>>> f402ae4f0f74ce476d243a8a524345225452c09d
 
 }

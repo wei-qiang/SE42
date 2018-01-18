@@ -4,6 +4,7 @@ import models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 
 public class UserDAOJPA implements UserDAO {
 
@@ -24,6 +25,12 @@ public class UserDAOJPA implements UserDAO {
         q.setParameter("username", username);
         //q.setParameter("password",password);
         return (User) q.getSingleResult();
+    }
+
+    @Override
+    public ArrayList<User> getAllUsers(){
+        Query q = em.createNamedQuery("User.getAll", User.class);
+        return (ArrayList<User>) q.getResultList();
     }
 
     @Override

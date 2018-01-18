@@ -2,8 +2,14 @@ package models;
 
 import javax.persistence.*;
 
+@NamedQueries({
+        @NamedQuery(name = "Card.getAll",
+                query = "select c from Card as c"),
+        @NamedQuery(
+                name = "Card.get",
+                query = "select c from Card as c where c.id = :id"),
+})
 
-@NamedQuery(name = "Card.getAll", query = "select c from Card as c")
 
 @Entity
 public class Card {

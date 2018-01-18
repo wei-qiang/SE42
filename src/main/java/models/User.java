@@ -1,14 +1,16 @@
 package models;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
-@NamedQuery(
-        name = "User.login",
-        query = "select a from User as a where a.username = :username")
+@NamedQueries({
+        @NamedQuery(name = "User.getAll",
+                query = "select a from User as a"),
+        @NamedQuery(
+                name = "User.login",
+                query = "select a from User as a where a.username = :username"),
+})
+
 @Entity
 public class User extends Account {
     @OneToMany(cascade = CascadeType.MERGE)
