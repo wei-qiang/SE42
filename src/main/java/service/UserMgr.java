@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,6 +51,23 @@ public class UserMgr {
             em.close();
         }
         return user;
+    }
+
+    public ArrayList<User> getAllUsers() {
+        EntityManager em = emf.createEntityManager();
+        UserDAO userDAO = new UserDAOJPA(em);
+        ArrayList<User> users = new ArrayList<>();
+        em.getTransaction().begin();
+        try {
+            users = userDAO.getAllUsers();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+        return users;
     }
 
     public void deleteById(int id) {

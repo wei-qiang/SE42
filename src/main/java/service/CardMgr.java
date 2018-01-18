@@ -3,11 +3,14 @@ package service;
 import dao.CardDAO;
 import dao.CardDAOJPA;
 import models.Card;
+import models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CardMgr {
 
@@ -36,5 +39,22 @@ public class CardMgr {
         CardDAO cardDAO = new CardDAOJPA(em);
         em.close();
         return cardDAO.findAll();
+    }
+
+    public Card getCard(int id){
+        EntityManager em = emf.createEntityManager();
+        CardDAO cardDAO = new CardDAOJPA(em);
+        em.getTransaction().begin();
+        try {
+            Card card = cardDAO.findById(id);
+            em.getTransaction().commit();
+            return card;
+        } catch (Exception e) {
+            Logger.getLogger(UserMgr.class.getName()).log(Level.SEVERE, null, e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+        return null;
     }
 }
